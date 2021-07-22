@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export class MenuMeal {
   constructor() {
@@ -9,7 +10,7 @@ export class MenuMeal {
 
   name: string = '';
   description?: string;
-  rank:number = 0;
+  rank: number = 0;
   business: Business;
   itemCountList: MenuItemCount[] = [];
   itemCount?: MenuItemCount;
@@ -53,8 +54,8 @@ export class Business {
   id: number = 0;
   name: string = '';
   website: string = '';
-  locatorUrl:string = '';
-  addressList: Address[] = [];  
+  locatorUrl: string = '';
+  addressList: Address[] = [];
 }
 
 @Injectable({
@@ -65,6 +66,9 @@ export class MenuMealService {
   constructor(private httpClient: HttpClient) { }
 
   getMenuMealList = (id: string): Observable<MenuMeal[]> => {
-    return this.httpClient.get<MenuMeal[]>('http://localhost/ChickenWingMcGee.API/api/MenuMealList/' + id);
+    return this.httpClient
+      .get<MenuMeal[]>(environment.API_URL + 'MenuMealList/' + id);
   }
 }
+
+
