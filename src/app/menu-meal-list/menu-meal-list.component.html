@@ -1,0 +1,95 @@
+<div class="container">
+
+    <h1>Hot Wings </h1>
+
+    <div class="row" *ngFor="let mi of menuMealList">
+
+
+        <div class="col-8 menu-item">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <span class="h2">
+                        #{{mi.rank}}
+                    </span>
+                    <span class="h2">
+                        <a [routerLink]="['/business', mi.business.id]">{{mi.business.name}}</a>
+                    </span>
+
+                    <span style="margin-top:5px" class="float-end"><a target="_blank"
+                            href="{{mi.business.website}}">{{mi.business.website}}</a> </span>
+
+                    <span *ngIf="mi.business.addressList.length === 1 && mi.business.locatorUrl.length === 0 ">
+                        <br>
+                        {{mi.business.addressList[0].line1}}
+                        <br>
+                        {{mi.business.addressList[0].city}},
+                        {{mi.business.addressList[0].state}}
+                        <br>
+                        {{mi.business.addressList[0].phoneNumber | phoneFormat}}
+                    </span>
+
+
+
+                    <div style="margin-top:5px;" *ngIf="mi.business.locatorUrl.length > 0">
+                        <a target="_blank" href="{{mi.business.locatorUrl}}">Locate Store</a>
+                    </div>
+
+
+                    <span *ngIf="mi.business.addressList.length > 1 ">
+                        <br>
+                        <span> {{mi.business.addressList.length}} Locations</span>
+                    </span>
+                </div>
+
+            </div>
+
+            <hr>
+            <div class="row">
+
+
+                <div *ngFor="let ic of mi.itemCountList" class="col-3">
+
+                    <mat-card>                        
+                        <mat-card-content>
+                            
+                            <span> <b> ${{ic.cost}}</b></span>
+                            {{ic.count}} Count 
+                            <br>
+                            {{ic.costPerUnit | currency}} each
+                        </mat-card-content>
+                        <mat-card-footer>                            
+                        </mat-card-footer>
+                    </mat-card>
+                    
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+
+                    <hr>
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let v of mi.varietyList">{{v.name}}</mat-chip>
+                    </mat-chip-list>
+                    <br><!-- remove if you don't need space -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+
+                    <span *ngFor="let o of mi?.optionList">
+                        <b> {{o.name}} </b>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
